@@ -1,0 +1,37 @@
+node {
+ stage('Git-Checkout') {
+    git 'https://github.com/Laharivegiraju22/ansible.git'
+  }
+  stage('Jfrog Artifactory download'){
+     steps{
+   script{
+    def server= Artifactory.server 'jenkins-server-artifactory'
+    def downloadSpec = """{
+ "files": [
+  {
+      "pattern": "petclinic/*.war",
+     // "target": "/var/lib/jenkins/pipeline-artifact/"
+      "target": "templates/petclinic.war"
+    }
+ ]
+}"""
+server.download(downloadSpec)
+  }
+}
+stage('Geting Ready For Ansible') {
+  
+ // sh label: 'Docker', script: 'cp -rf target/*.war ../../../04-Terraform/03-Ansible-Deploy/ansible/04-Tomcat/templates/'
+  sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > templates/apps/index.html"
+}  
+def project_terra="04-Terraform/03-Ansible-Deploy/ansible/04-Tomcat" 
+dir(project_terra) { 
+stage('Prod Deployment on AWS'){
+sh label: 'terraform', script: 'ansible-playbook -i /root/.jenkins/workspace/ansible/inventory -u ubuntu --key /root/.ssh/hkey.pem web-playbook.yaml'
+
+ 
+}
+
+ 
+}
+
+}
