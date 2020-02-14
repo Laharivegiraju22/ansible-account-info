@@ -5,7 +5,7 @@ node {
   stage('Jfrog Artifactory download'){
      steps{
    script{
-    def server= Artifactory.server 'jenkins-server-artifactory'
+   def server= Artifactory.server 'Artifactory'
     def downloadSpec = """{
  "files": [
   {
