@@ -3,9 +3,7 @@ node {
     git 'https://github.com/Laharivegiraju22/ansible.git'
   }
   stage('Jfrog Artifactory download'){
-     steps{
-   script{
-   def server= Artifactory.server 'Artifactory'
+    def server= Artifactory.server 'Artifactory'
     def downloadSpec = """{
  "files": [
   {
@@ -17,7 +15,7 @@ node {
 }"""
 server.download(downloadSpec)
   }
-}
+
 stage('Geting Ready For Ansible') {
   
  // sh label: 'Docker', script: 'cp -rf target/*.war ../../../04-Terraform/03-Ansible-Deploy/ansible/04-Tomcat/templates/'
