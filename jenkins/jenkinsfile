@@ -23,7 +23,7 @@ server.download(downloadSpec)
   }
 }
 stage('Geting Ready For Ansible') {
- sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > ansible/jenkins/index.html"
+ sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' >/root/.jenkins/workspace/ansible/jenkins/index.html"
 }  
 def project_terra="ansible/" 
 dir(project_terra) { 
