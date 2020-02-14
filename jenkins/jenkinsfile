@@ -7,6 +7,7 @@ node {
  dir(project_path) {
  
  stage('create artifact folder to store artifact'){
+    sh label: '',script: "rmdir warfile"
     sh label: '', script: "mkdir warfile"
     }
   stage('Jfrog Artifactory download'){
