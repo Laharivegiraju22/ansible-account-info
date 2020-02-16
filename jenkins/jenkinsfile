@@ -29,7 +29,7 @@ stage('Geting Ready For Ansible') {
 def project_terra="ansible/" 
 dir(project_terra) { 
 stage('Prod Deployment on AWS'){
-sh label: 'terraform', script: 'ansible-playbook -i /root/.jenkins/workspace/ansible/inventory -u ubuntu --key /root/.ssh/hkey.pem /root/.jenkins/workspace/ansible/web-playbook.yaml'
+sh label: 'terraform', script: 'ansible-playbook -i /root/.jenkins/workspace/infra/terraform/jenkins-ci.ini -u ubuntu --key /root/.ssh/hkey.pem /root/.jenkins/workspace/ansible/web-playbook.yaml'
 
  
 }
