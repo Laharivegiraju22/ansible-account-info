@@ -31,7 +31,7 @@
 
 
   - name: Copy Petclinic Project War Files
-    copy: src=/root/.jenkins/workspace/ansible/jenkins/warfile/petclinic.war dest=/opt/SP/apps/tomcat/webapps/ mode=0644
+    copy: src=/root/.jenkins/workspace/ansible-account-info/jenkins/microservicewarfile/petclinic.war dest=/opt/SP/apps/tomcat/webapps/ mode=0644
 
   handlers:
   - name: Restart Tomcat
