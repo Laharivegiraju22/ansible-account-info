@@ -1,6 +1,6 @@
 node {
  stage('Git-Checkout') {
-    git 'https://github.com/Laharivegiraju22/ansible.git'
+    git 'https://github.com/Laharivegiraju22/ansible-account-info.git'
   }
   def project_path="jenkins"
  
