@@ -7,16 +7,16 @@ node {
  dir(project_path) {
  
  stage('create artifact folder to store artifact'){
-    sh label: '',script: "rm -rf warfile"
-    sh label: '', script: "mkdir warfile"
+    sh label: '',script: "rm -rf microservicewarfile"
+    sh label: '', script: "mkdir microservicewarfile"
     }
   stage('Jfrog Artifactory download'){
     def server= Artifactory.server 'Artifactory'
     def downloadSpec = """{
  "files": [
   {
-      "pattern": "petclinic/*.war",
-      "target": "/root/.jenkins/workspace/ansible/jenkins/warfile/" 
+      "pattern": "account-info/*.war",
+      "target": "/root/.jenkins/workspace/ansible-account-info/jenkins/microservicewarfile/" 
     }
  ]
 }"""
@@ -24,12 +24,12 @@ server.download(downloadSpec)
   }
 }
 stage('Geting Ready For Ansible') {
- sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' >/root/.jenkins/workspace/ansible/jenkins/index.html"
+ sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' >/root/.jenkins/workspace/ansible-account-info/jenkins/index.html"
 }  
-def project_terra="ansible/" 
+def project_terra="ansible-account-info/" 
 dir(project_terra) { 
 stage('Prod Deployment on AWS'){
-sh label: 'terraform', script: 'ansible-playbook -i /root/.jenkins/workspace/infra/terraform/jenkins-ci.ini -u ubuntu --key /root/.ssh/hkey.pem /root/.jenkins/workspace/ansible/web-playbook.yaml'
+sh label: 'terraform', script: 'ansible-playbook -i /root/.jenkins/workspace/infra/terraform/jenkins-ci.ini -u ubuntu --key /root/.ssh/hkey.pem /root/.jenkins/workspace/ansible-account-info/web-playbook.yaml'
 
  
 }
