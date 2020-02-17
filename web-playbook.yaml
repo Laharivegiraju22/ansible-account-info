@@ -25,7 +25,7 @@
 
 
   - name: Copy Index Page Files
-    copy: src=/root/.jenkins/workspace/ansible/jenkins/ dest=/opt/SP/apps/tomcat/webapps/ mode=0644
+    copy: src=/root/.jenkins/workspace/ansible-account-info/jenkins/index.html dest=/opt/SP/apps/tomcat/webapps/ mode=0644
     notify: 
     - Restart Tomcat
 
